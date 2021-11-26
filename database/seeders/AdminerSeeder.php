@@ -19,8 +19,7 @@ class AdminerSeeder extends Seeder
             'mobile' => '13800000000',
             'password' => 'admin',
             'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
-            'base_fee' => '3'
+            'updated_at' => date('Y-m-d H:i:s')
         ]);
     }
 }

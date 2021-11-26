@@ -13,7 +13,7 @@ class CreateDiversTable extends Migration
      */
     public function up()
     {
-        Schema::create('divers', function (Blueprint $table) {
+        Schema::create('drivers', function (Blueprint $table) {
             $table->id();
             $table->string('openid', 32)->comment('微信用户openid')->index();
             $table->string('nickname', 64)->nullable()->comment('微信昵称');
@@ -24,6 +24,7 @@ class CreateDiversTable extends Migration
             $table->string('password', 32)->comment('登录密码');
             $table->tinyInteger('status')->default(0)->comment('状态，0-未验证身份，1-正常');
             $table->string('car_model', 64)->comment('车型');
+            $table->string('car_no', 16)->comment('车牌号');
             $table->tinyInteger('car_limit')->comment('车型荷载人数');
             $table->timestamps();
         });

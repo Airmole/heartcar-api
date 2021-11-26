@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\IndexController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WechatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function (Request $request) {
-    echo 111;
+Route::post('/register', [IndexController::class, 'register']);
+
+// 微信小程序接口
+Route::prefix('wechat')->group(function () {
+    Route::get('openid', [WechatController::class, 'getOpenid']);
 });
