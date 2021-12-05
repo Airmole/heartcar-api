@@ -1,8 +1,6 @@
 <?php
 
-use App\Http\Controllers\IndexController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\WechatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +13,18 @@ use App\Http\Controllers\WechatController;
 |
 */
 
-Route::post('/register', [IndexController::class, 'register']);
+Route::post('/register', [\App\Http\Controllers\IndexController::class, 'register']);
+
+// 订单相关接口
+Route::prefix('order')->group(function () {
+    Route::get('/', [\App\Http\Controllers\OrderController::class, 'index']);
+    Route::get('/my', [\App\Http\Controllers\OrderController::class, 'my']);
+    Route::post('/', [\App\Http\Controllers\OrderController::class, 'store']);
+    Route::get('/{id}', [\App\Http\Controllers\OrderController::class, 'show']);
+    Route::get('/{id}/cancel', [\App\Http\Controllers\OrderController::class, 'cancel']);
+});
 
 // 微信小程序接口
 Route::prefix('wechat')->group(function () {
-    Route::get('openid', [WechatController::class, 'getOpenid']);
+    Route::get('openid', [\App\Http\Controllers\WechatController::class, 'getOpenid']);
 });
