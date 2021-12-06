@@ -32,4 +32,14 @@ class User extends Model
         'password'
     ];
 
+    public function getUpdatedAtAttribute($value)
+    {
+        return $value ? date("Y-m-d H:i:s", strtotime($value)) : '';
+    }
+
+    public function getCreatedAtAttribute($value)
+    {
+        return $value ? date("Y-m-d H:i:s", strtotime($value)) : '';
+    }
+
 }

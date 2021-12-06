@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('/register', [\App\Http\Controllers\IndexController::class, 'register']);
+Route::post('/login', [\App\Http\Controllers\IndexController::class, 'login']);
 
 // 订单相关接口
 Route::prefix('order')->group(function () {
@@ -27,4 +28,5 @@ Route::prefix('order')->group(function () {
 // 微信小程序接口
 Route::prefix('wechat')->group(function () {
     Route::get('openid', [\App\Http\Controllers\WechatController::class, 'getOpenid']);
+    Route::post('login', [\App\Http\Controllers\WechatController::class, 'login']);
 });

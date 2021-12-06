@@ -22,4 +22,25 @@ class IndexController extends Controller
         $this->responseJson(200, [ 'message' => 'success' ]);
     }
 
+    public function login(Request $request)
+    {
+        $type = $request->input('type');
+        $data = $request->except('type');
+        $result = [];
+        if ($type == 'user') {
+            $result = User::where('mobile', $data['mobile'])->first();
+        }
+        if ($type == 'driver') {
+            $result = Driver::where('mobile', $data['mobile'])->first();
+        }
+        if (empty($result)) {
+            $this->responseJson(403, [ 'message' => '未注册' ]);
+        }
+        if ($result && $result->password == $data['password']) {
+            $result['type'] = $type;
+            $this->responseJson(200, [ 'message' => 'success', 'data' => $result ]);
+        }
+        $this->responseJson(403, [ 'message' => '密码错误' ]);
+    }
+
 }
