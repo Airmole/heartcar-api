@@ -21,8 +21,12 @@ Route::prefix('order')->group(function () {
     Route::get('/', [\App\Http\Controllers\OrderController::class, 'index']);
     Route::get('/my', [\App\Http\Controllers\OrderController::class, 'my']);
     Route::post('/', [\App\Http\Controllers\OrderController::class, 'store']);
+    Route::post('/fee', [\App\Http\Controllers\OrderController::class, 'fee']);
     Route::get('/{id}', [\App\Http\Controllers\OrderController::class, 'show']);
     Route::get('/{id}/cancel', [\App\Http\Controllers\OrderController::class, 'cancel']);
+    Route::post('/{id}/accept', [\App\Http\Controllers\OrderController::class, 'accept']);
+    Route::post('/{id}/finish', [\App\Http\Controllers\OrderController::class, 'finish']);
+    Route::post('/{id}/join', [\App\Http\Controllers\OrderController::class, 'join']);
 });
 
 // 微信小程序接口

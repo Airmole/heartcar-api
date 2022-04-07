@@ -53,6 +53,22 @@ class Order extends Model
         'end' => 'json',
     ];
 
+    //追加字段
+    protected $appends = ['fee'];
+
+    public function getFeeAttribute()
+    {
+        $distance = $this->attributes['distance'];
+        $price = Price::where('distance_start', '<', $distance)
+            ->where('distance_end', '>=', $distance)
+            ->first();
+        if (empty($price)) {
+            $price = Price::orderBy('distance_end', 'desc')->first();
+        }
+        $typePrice = $this->attributes['type'] == 0 ? 'inpooling_price' : 'pooling_price';
+        return sprintf("%.2f", $distance * ($price->$typePrice));
+    }
+
     public static function createNewOrderNo()
     {
         return "SO" . date("YmdHis") . mt_rand(1000, 9999);

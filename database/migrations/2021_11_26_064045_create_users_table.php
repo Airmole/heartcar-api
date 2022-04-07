@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('nickname', 64)->nullable()->comment('微信昵称');
             $table->string('avatar')->nullable()->comment('用户头像');
             $table->string('name', 64)->comment('姓名');
-            $table->string('mobile', 18)->comment('联系电话')->index();
+            $table->string('mobile', 18)->comment('联系电话')->unique();
             $table->string('idcard', 18)->nullable()->comment('身份证号码');
             $table->string('password', 32)->comment('登录密码');
             $table->tinyInteger('status')->default(0)->comment('状态，0-未验证身份，1-正常');
